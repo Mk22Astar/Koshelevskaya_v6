@@ -1,0 +1,37 @@
+﻿<Page x:Class="Koshelevskaya_v6.Klienti"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="clr-namespace:Koshelevskaya_v6"
+      Title="Клиенты">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+            <ComboBox SelectionChanged="ComboBox_SelectionChanged" Width="200" Margin="0,0,10,0">
+                <ComboBoxItem Tag="NameAsc">
+                    <TextBlock Text="По возрастанию имени" />
+                </ComboBoxItem>
+                <ComboBoxItem Tag="NameDesc">
+                    <TextBlock Text="По убыванию имени" />
+                </ComboBoxItem>
+            </ComboBox>
+            <Button Content="Добавить клиента" Click="AddClient_Click" Width="150" />
+        </StackPanel>
+        <DataGrid x:Name="agentGrid" Grid.Row="1" AutoGenerateColumns="False" Margin="10" MouseDoubleClick="agentGrid_MouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding ClientID}" Width="50" />
+                <DataGridTextColumn Header="Имя клиента" Binding="{Binding ClientName}" Width="200" />
+                <DataGridTextColumn Header="Контакты" Binding="{Binding ContactInfo}" Width="200" />
+                <DataGridTemplateColumn Header="Фото">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Width="50" Height="50" Source="{Binding Photo, Converter={StaticResource ByteArrayToImageConverter}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>
